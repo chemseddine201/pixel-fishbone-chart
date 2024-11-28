@@ -1,6 +1,6 @@
 {
   "name": "fishbone-chart-example",
-  "homepage": "https://thiagoferrax.github.io/fishbone-chart",
+  "homepage": "#",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -8,8 +8,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "fishbone-chart": "file:.."
+    "react-scripts": "^1.1.4"
+
   },
   "scripts": {
     "start": "react-scripts start",

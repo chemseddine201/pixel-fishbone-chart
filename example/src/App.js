@@ -5,8 +5,33 @@ import FishboneChart from 'fishbone-chart'
 export default class App extends Component {
 
   render() {
+
     const data = {
-      'Bad Coffee': {
+      name: 'Problem Name',
+      children: [
+        {
+          name: 'Immediate Causes - Actions', //main Causes
+          children: [
+            {
+              name: 'Following Procedures',//sub causes
+              children: [
+                {
+                  name: 'Violation by individual',//sub sub causes
+                },
+                {
+                  name: 'Operation of equipment without authority',
+                }, 
+                {
+                  name: 'Improper position or posture for the task'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    /* const data = {
+      '': {
         'Procedures': ['Too much water', 'Too many grounds', 'Lack of training'],
         'Equipment': ['Dirty cups', 'Coffee not hot enough', 'Dirty basket'],
         'Material': ['Bad sugar', 'Lids do not fit cup', 'Bad cream'],
@@ -28,7 +53,7 @@ export default class App extends Component {
         'Procedure': ['No procedure for securing laptop at public locations'],
         'Environment': ['No place to secure laptop overnight at workplace']
       }
-    }
+    } */
 
     return (
       <div style={{ width: 1100, margin: "15px auto" }}>

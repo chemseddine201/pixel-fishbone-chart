@@ -12,7 +12,7 @@ export default class FishboneChart extends Component {
 
     componentWillMount() { 
         const data = this.props.data
-        if(data) {
+        if (data) {
             const effect = Object.keys(data)[this.state.index]            
             this.setState({causes: data[effect], effect})
         }        
@@ -28,15 +28,19 @@ export default class FishboneChart extends Component {
 
     render() {
         if (!this.state.causes) {
-            return <React.Fragment></React.Fragment>
+            return <React.Fragment>No Data Received</React.Fragment>
         }
 
         return (
             <Grid cols={this.props.cols}>
                 <div className="fishboneChart">
+                    {/* Main Problem */}
+                    {/* Main Causes */}
+                    {/* Sub Causes */}
+                    {/* Sub-Sub Causes */}
                     {this.getCauses()}
                     {this.getEffect()}
-                    {this.getLegend()}
+                    {/* {this.getLegend()} */}
                 </div>
             </Grid >
         )
