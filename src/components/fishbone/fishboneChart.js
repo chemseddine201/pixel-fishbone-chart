@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Grid from '../layout/grid'
 import './fishboneChart.css'
 
-const INITIAL_STATE = {causes: undefined, effect: undefined, index: 0}
+const INITIAL_STATE = {data: undefined, index: 0}
 
 export default class FishboneChart extends Component {
     constructor(props) {
@@ -13,21 +13,19 @@ export default class FishboneChart extends Component {
     componentWillMount() { 
         const data = this.props.data
         if (data) {
-            const effect = Object.keys(data)[this.state.index]            
-            this.setState({causes: data[effect], effect})
+            this.setState({data: data})
         }        
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.data !== nextProps.data) {
             const data = nextProps.data
-            const effect = Object.keys(data)[this.state.index]
-            this.setState({causes: data[effect], effect})
+            this.setState({data: data})
         }
     }
 
     render() {
-        if (!this.state.causes) {
+        if (!this.state.data) {
             return <React.Fragment>No Data Received</React.Fragment>
         }
 
@@ -40,27 +38,26 @@ export default class FishboneChart extends Component {
                     {/* Sub-Sub Causes */}
                     {this.getCauses()}
                     {this.getEffect()}
-                    {/* {this.getLegend()} */}
                 </div>
             </Grid >
         )
     }
 
-    getTopCauses(causes) {
-        const categories = Object.keys(causes)
+    getTopCauses(children) {
 
-        const middle = parseInt(categories.length / 2)
-        const topArray = categories.slice(0, middle)
+        const middle = parseInt(children.length / 2)
+        const causesArray = children.slice(0, middle)
 
         const color = this.getColor(this.state.index)
-        const topCauses = topArray.map((category, index) => {
+
+        const topCauses = causesArray.map((cause, index) => {
             return (
-                <div key={`top_causes_${category}_${index}`} className="causeContent">
+                <div key={`top_causes_${cause.name}_${index}`} className="causeContent">
                     <div className={`cause top ${color}_ ${color}Border`}>
-                        {category}
+                        {cause.name}
                     </div>
                     <div className="causeAndLine">
-                        {this.getRootCauses(causes[category])}
+                        {this.getSubCauses(cause.children)}
                         <div className={`diagonalLine ${color}TopBottom`}/>
                     </div>
                 </div>
@@ -70,31 +67,62 @@ export default class FishboneChart extends Component {
         return (<div className="causesGroup">{topCauses}</div>)
     }
 
-    getRootCauses(rootCauses) {
-        const causes = rootCauses.map((rootCause, index) => {
-            return (<div key={`root_causes_${rootCause}_${index}`}>{rootCause}</div>)
+    //this is the 
+    getSubCauses(subCauses) {
+        const subCausesItems = subCauses.map((subCause, index) => {
+            return (<div className="cuseContainer" key={`root_causes_${subCause.name}_${index}`}>
+                <span className={`cause top gray_ grayBorder lineEffect bold`}>{subCause.name}</span>
+                <ul className='subcauses-list'>
+                    {
+                       Array.isArray(subCause.children) ?  subCause.children.map((_subCause, index) => {
+                            return <li key={`sub_causes_${index}_${_subCause.name}`}>{_subCause.name}</li>
+                        }) : null
+                    }
+                </ul>
+                
+            </div>)
         })
-        return (<div className="rootCauses">{causes}</div>)
+        return (<div className="rootCauses">{subCausesItems}</div>)
     }
 
-    getBottomCauses(causes) {
-        const categories = Object.keys(causes)
+    recursiveCauses(causes) {
+        const renderSubCauses = (subCauses, depth = 0) => {
+            return subCauses.map((subCause, index) => {
+                return (
+                    <div 
+                    key={`root_causes_${subCause.name}_${index}`} 
+                    className={`rootCauses depth-${depth}`}
+                    >
+                    <div className="cause-name">{subCause.name}</div>
+                    {subCause.children && subCause.children.length > 0 && (
+                        <div className="cause-children">
+                        {renderSubCauses(subCause.children, depth + 1)}
+                        </div>
+                    )}
+                    </div>
+                )
+        })
+     }
+    }
+    
 
-        const middle = parseInt(categories.length / 2)
-        const bottomArray = categories.slice(middle)
+    getBottomCauses(children) {
+
+        const middle = parseInt(children.length / 2)
+        const causesArray = children.slice(middle)
 
         const color = this.getColor(this.state.index)
 
-        const bottomCauses = bottomArray.map((category, index) => {
+        const bottomCauses = causesArray.map((cause, index) => {
             return (
-                <div key={`bottom_causes_${category}_${index}`}
+                <div key={`bottom_causes_${cause.name}_${index}`}
                     className="causeContent">
                     <div className="causeAndLine">
-                        {this.getRootCauses(causes[category])}
+                        {this.getSubCauses(cause.children)}
                         <div className={`diagonalLine ${color}BottomTop`}/>
                     </div>
                     <div className={`cause bottom ${color}_ ${color}Border`}>
-                        {category}
+                        {cause.name}
                     </div>
                 </div>
             )
@@ -104,13 +132,14 @@ export default class FishboneChart extends Component {
     }
 
     getCauses() {
-        const causes = this.state.causes
+        const children = this.state.data.children
         const color = this.getColor(this.state.index)
+        //
         return (
             <div className="causes">
-                {this.getTopCauses(causes)}
+                {this.getTopCauses(children)}
                 <div className={`lineEffect ${color}Border`} />
-                {this.getBottomCauses(causes)}
+                {this.getBottomCauses(children)}
             </div>
         )
     }
@@ -120,21 +149,21 @@ export default class FishboneChart extends Component {
         return (
             <div className={`effect left ${color}_ ${color}Border`}>
                 <div className={`effectValue`}>
-                    {this.state.effect}
+                    {this.state.data.title}
                 </div>
             </div>
         )
     }
 
-    selectDataset(index) {
+    /* selectDataset(index) {
         const data = this.props.data
         if(data) {
             const effect = Object.keys(data)[index]            
             this.setState({causes: data[effect], effect, index})
         }
-    }
+    } */
 
-    getLegend() {        
+    /* getLegend() {        
         const labels = Object.keys(this.props.data)
 
         if(labels.length <= 1) {
@@ -157,7 +186,7 @@ export default class FishboneChart extends Component {
                 {labelsDivs}
             </div>
         )
-    }
+    } */
 
     getColor(index) {
         const colors = [

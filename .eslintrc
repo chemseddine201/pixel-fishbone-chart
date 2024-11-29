@@ -1,8 +1,8 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "standard",
-    "standard-react"
+    "react-app",
+    "react-app/jest"
   ],
   "env": {
     "es6": true

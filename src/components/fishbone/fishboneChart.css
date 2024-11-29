@@ -63,7 +63,7 @@
     font-weight: 400;
     color: #4f4f4f;
     text-align: right;
-    padding: 15px 0px;
+    padding: 18px 0px;
 }
 
 .legend {
@@ -84,6 +84,12 @@
     margin-bottom: 6px;   
     cursor: default;     
 } 
+
+.bold {
+    font-weight: bold;
+}
+
+
 
 .blue_{
     background: rgb(0, 192, 239, 0.1);
@@ -299,4 +305,16 @@
     justify-content: center;
     align-items: center;
     min-height: 50%;
+}
+
+.subcauses-list {
+    text-align: left;
+}
+
+.cuseContainer {
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background: #f9f9f9;
+    margin-bottom: 15px;
 }

@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 
-import FishboneChart from 'fishbone-chart'
+import FishboneChart from 'pixel-fishbone-chart'
+
+console.log(FishboneChart);
 
 export default class App extends Component {
 
   render() {
 
     const data = {
-      name: 'Problem Name',
+      title: 'Problem Name',
       children: [
         {
           name: 'Immediate Causes - Actions', //main Causes
           children: [
-            {
+            /* {
               name: 'Following Procedures',//sub causes
               children: [
                 {
@@ -25,39 +27,144 @@ export default class App extends Component {
                   name: 'Improper position or posture for the task'
                 }
               ]
+            }, */
+            {
+              name: 'Use of Tools or Equipment',//sub causes
+              children: [
+                {
+                  name: 'Improper use of equipment',//sub sub causes
+                },
+                {
+                  name: 'Improper placement of tools, equipment, or materials',
+                }, 
+                {
+                  name: 'Servicing of equipment in operation'
+                }
+              ]
+            },
+            {
+              name: 'Use of Protective Methods',//sub causes
+              children: [
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                }
+              ]
+            }
+
+          ]
+        },
+        {
+          name: 'Immediate Causes - Conditions',
+          children: [
+            {
+              name: 'Protective Systems',
+              children:[
+                {
+                  name:'Inadequate guards or protective devices'
+                },
+                {
+                  name:'Defective guards or protective devices'
+                }, 
+                {
+                  name:'Inadequate isolation of process or equipment'
+                }
+              ]
             }
           ]
-        }
+        },
+        {
+          name: 'System Causes - Personal Factors',
+          children: [
+            {
+              name: 'Physical Condition',
+              children: [
+                {
+                  name: 'Diminished Performance (Due to Temperature Extremes)'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'System Causes - Job Factors',
+          children: [
+            {
+              name: 'Training / Knowledge Transfer',
+              children:[
+                {
+                  name: 'Inadequate Knowledge Transfer (Inadequate Instructor Qualifications)',
+
+                },
+                {
+                  name: 'Inadequate Recall of Training Material (Training Not Reinforced on the Job)',
+
+                },
+                {
+                  name: 'Inadequate Training Effort (Inadequate Training Goals / Objectives)',
+                },
+              ]
+            },
+           /*  {
+              name: 'Management / Supervision / Employee Leadership',
+              children:[
+                {
+                  name: 'Conflicting Roles / Responsibilities (Unclear Assignment of Responsibility)'
+                },
+                {
+                  name: 'Inadequate Leadership (Inadequate or Incorrect Performance Feedback)'
+                }
+              ]
+            },
+            {
+              name: 'Work Planning',
+              children:[
+                {
+                  name: 'Inadequate Preventive Maintenance (Assessment of Needs)'
+                },
+              ]
+            }, */
+            {
+              name: 'Purchasing, Material Handling & Material Control',
+              children:[
+                {
+                  name: 'Incorrect Item Received (Inadequate Specifications to Vendor)'
+                },
+                {
+                  name: 'Incorrect Item Received (Unauthorized Substitution)'
+                },
+                {
+                  name: 'Inadequate Material Packaging'
+                },
+              ]
+            },
+            {
+              name: 'Tools & Equipment',
+              children:[
+                {
+                  name: 'Inadequate Human Factors / Ergonomics Considerations'
+                },
+                {
+                  name: 'Inadequate Availability'
+                },
+                {
+                  name: 'Inadequate Removal / Replacement of Unsuitable Items'
+                },
+              ]
+            },
+          ]
+        },
       ]
     }
-    /* const data = {
-      '': {
-        'Procedures': ['Too much water', 'Too many grounds', 'Lack of training'],
-        'Equipment': ['Dirty cups', 'Coffee not hot enough', 'Dirty basket'],
-        'Material': ['Bad sugar', 'Lids do not fit cup', 'Bad cream'],
-        'People': ['Wrong fee', 'No training', 'Rude'],
-        'Machine': ['Not working', 'Deregulated', 'Dirty']
-      },
-      'Bad Scrum': {
-        'Principles': ['Functional software (SW) is not released'],
-        'Product Owner (PO)': ['No authority to prioritize', 'Poor interaction with the team'],
-        'Sprint': ['SW not released for validation', 'Sprint speed is not measured', 'Team is controlled from outside'],
-        'Planning': ['PO does not explain the backlog'],
-        'Development Team': ['Members dedicated to specific roles', 'Does not deliver what was promised'],
-      },
-      'Security Incident': {
-        'Technology': ['Weak encryption', 'No technology for remote data destruction'],
-        'Process': ['No process for reporting incident'],
-        'People': ['Worker lost laptop', 'Distraction was a factor'],
-        'Controls': ['Week password policy', 'No audit trail of the laptop information'],
-        'Procedure': ['No procedure for securing laptop at public locations'],
-        'Environment': ['No place to secure laptop overnight at workplace']
-      }
-    } */
 
     return (
       <div style={{ width: 1100, margin: "15px auto" }}>
-        <h1>FishboneChart Example</h1>
+        <h1>Pixel-Fishbone-Chart</h1>
         <hr/>
         <br/>
         <FishboneChart data={data} />

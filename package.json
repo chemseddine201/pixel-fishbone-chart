@@ -1,10 +1,14 @@
 {
-  "name": "fishbone-chart",
+  "name": "pixel-fishbone-chart",
+  "homepage": ".",
   "version": "1.0.0",
   "description": "Multi Level fishbone chart for react.",
   "author": "chemstech",
   "license": "MIT",
-  "repository": "@chemstech/pixel-fishbone-chart",
+  "repository": {
+    "type": "git",
+    "url": "@chemseddine201/pixel-fishbone-chart"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
