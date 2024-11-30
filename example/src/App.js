@@ -14,7 +14,7 @@ export default class App extends Component {
         {
           name: 'Immediate Causes - Actions', //main Causes
           children: [
-            /* {
+           /*  {
               name: 'Following Procedures',//sub causes
               children: [
                 {
@@ -27,7 +27,63 @@ export default class App extends Component {
                   name: 'Improper position or posture for the task'
                 }
               ]
-            }, */
+            },
+            {
+              name: 'Following Procedures',//sub causes
+              children: [
+                {
+                  name: 'Violation by individual',//sub sub causes
+                },
+                {
+                  name: 'Operation of equipment without authority',
+                }, 
+                {
+                  name: 'Improper position or posture for the task'
+                }
+              ]
+            },
+            {
+              name: 'Following Procedures',//sub causes
+              children: [
+                {
+                  name: 'Violation by individual',//sub sub causes
+                },
+                {
+                  name: 'Operation of equipment without authority',
+                }, 
+                {
+                  name: 'Improper position or posture for the task'
+                }
+              ]
+            },
+            {
+              name: 'Following Procedures',//sub causes
+              children: [
+                {
+                  name: 'Violation by individual',//sub sub causes
+                },
+                {
+                  name: 'Operation of equipment without authority',
+                }, 
+                {
+                  name: 'Improper position or posture for the task'
+                }
+              ]
+            },
+            {
+              name: 'Following Procedures',//sub causes
+              children: [
+                {
+                  name: 'Violation by individual',//sub sub causes
+                },
+                {
+                  name: 'Operation of equipment without authority',
+                }, 
+                {
+                  name: 'Improper position or posture for the task'
+                }
+              ]
+            },
             {
               name: 'Use of Tools or Equipment',//sub causes
               children: [
@@ -41,10 +97,19 @@ export default class App extends Component {
                   name: 'Servicing of equipment in operation'
                 }
               ]
-            },
+            },  */
             {
               name: 'Use of Protective Methods',//sub causes
               children: [
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                },
                 {
                   name: 'Personal protective equipment not used',//sub sub causes
                 },

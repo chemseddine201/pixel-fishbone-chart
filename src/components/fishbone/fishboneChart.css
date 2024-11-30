@@ -6,12 +6,12 @@
 
 .top {
     border-bottom: 2px solid;
-    border-radius: 5%;
+    border-radius: 5% 5% 0 0;
 }
 
 .bottom {
     border-top: 2px solid;
-    border-radius: 5%;
+    border-radius: 0 0 5% 5%; 
 }
 
 .left {
@@ -171,6 +171,7 @@
     border-color: rgb(104,115,140) !important;
 }
 
+
 .greenBorder {
     border-color: rgb(48, 187, 187) !important;
 }
@@ -227,6 +228,10 @@
 .diagonalLine {
     flex: 1;
     height:100%;
+    /* min-width: 120px !important;
+    width: 120px !important;
+    max-width: 120px !important; */
+
 }
 
 .blueTopBottom {
@@ -312,9 +317,26 @@
 }
 
 .cuseContainer {
-    padding: 10px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    background: #f9f9f9;
-    margin-bottom: 15px;
+    border: 1px solid #f9f9f9;
+    margin-bottom: 10px;
+    /* border-bottom: 200px solid #f9f9f9;
+    border-left: 0 solid transparent;
+    border-right: 20px solid transparent;
+    height: 0;
+    width: 100%;
+    margin-bottom: 15px; */
+}
+ 
+.absoluteBorder {
+    display: none;
+    position: absolute;
+    top: 27px;
+    right: -27px;
+    width: 60px;
+    height:2px;
+    border-bottom: 2px solid;
+}
+
+.thinBorder {
+    border-bottom: 5px solid;
 }

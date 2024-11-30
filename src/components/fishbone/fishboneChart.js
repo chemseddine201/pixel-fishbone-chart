@@ -17,11 +17,60 @@ export default class FishboneChart extends Component {
         }        
     }
 
+    calculateAngle(width, height) {
+        // Calculate the tangent of the angle
+        const tangent = height / width;
+    
+        // Use the inverse tangent function (arctan) to get the angle in radians
+        const angleInRadians = Math.atan(tangent);
+    
+        // Convert the angle from radians to degrees
+        const angleInDegrees = angleInRadians * (180 / Math.PI);
+    
+        return angleInDegrees;
+    }
+
+    calculateY(x, angleInDegrees) {
+        const phiInRadians = angleInDegrees * (Math.PI / 180);
+        // Calculate y
+        const y = x * Math.tan(phiInRadians);
+        return y;
+    }
+
     componentWillReceiveProps(nextProps) {
         if(this.props.data !== nextProps.data) {
             const data = nextProps.data
             this.setState({data: data})
         }
+    }
+
+    createDynamicTrapezoid(element, topWidth, color) {
+        element.style.clipPath = `polygon(
+            0% 0%, 
+            ${(100 - topWidth/2)}% 0%, 
+            100% 100%, 
+            0% 100%
+        )`;
+        element.style.backgroundColor = color;
+    }
+
+    componentDidMount() {
+        let items = document.querySelectorAll(".causeAndLine");
+        items.forEach(item => {
+            //
+            const lineElement = item.querySelector(".diagonalLine");
+            const angle = this.calculateAngle(lineElement.offsetWidth, lineElement.offsetHeight);
+            //
+            const rootCauses = item.querySelector(".rootCauses");
+            const causes = rootCauses.querySelectorAll(".cuseContainer");
+            //console.log(angle)
+            causes.forEach(cause => {
+                //this.createDynamicTrapezoid(cause, 20, color);
+                //cause.style.clipPath = `polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - (${cause.offsetHeight}px * tan(${angle}deg))))`
+                console.log(angle, cause.offsetHeight)
+                //console.log(this.calculateY(cause.offsetHeight, angle))
+            })
+        })
     }
 
     render() {
@@ -70,8 +119,15 @@ export default class FishboneChart extends Component {
     //this is the 
     getSubCauses(subCauses) {
         const subCausesItems = subCauses.map((subCause, index) => {
-            return (<div className="cuseContainer" key={`root_causes_${subCause.name}_${index}`}>
-                <span className={`cause top gray_ grayBorder lineEffect bold`}>{subCause.name}</span>
+            return (<div className="cuseContainer" 
+                style={{
+                    position: "relative",
+                    right: (index>0 ? (index*-10)-index : 0),
+                }}
+            
+            key={`root_causes_${subCause.name}_${index}`}>
+                <span className={`cause top gray_ blueBorder lineEffect bold thinBorder`}>{subCause.name}</span>
+                <div className="blueBorder absoluteBorder" ></div>
                 <ul className='subcauses-list'>
                     {
                        Array.isArray(subCause.children) ?  subCause.children.map((_subCause, index) => {
