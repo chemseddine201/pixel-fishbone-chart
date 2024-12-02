@@ -302,9 +302,6 @@ export default class App extends Component {
 
     return (
       <div style={{ width: 1100, margin: "15px auto" }}>
-        <h1>Pixel-Fishbone-Chart</h1>
-        <hr/>
-        <br/>
         <FishboneChart data={data} />
       </div>
     )
