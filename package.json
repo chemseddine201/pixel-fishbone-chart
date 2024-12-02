@@ -1,7 +1,7 @@
 {
   "name": "pixel-fishbone-chart",
   "homepage": ".",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Multi Level fishbone chart for react.",
   "author": "chemstech",
   "license": "MIT",

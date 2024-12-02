@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 
 import FishboneChart from 'pixel-fishbone-chart'
 
-console.log(FishboneChart);
-
 export default class App extends Component {
 
   render() {
