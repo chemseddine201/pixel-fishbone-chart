@@ -9,13 +9,13 @@ export default class App extends Component {
   render() {
 
     const data = {
-      title: 'Problem Name',
+      title: 'Inadequate Knowledge Transfer (Inadequate Instructor Qualifications)',
       children: [
         {
           name: 'Immediate Causes - Actions', //main Causes
           children: [
-           /*  {
-              name: 'Following Procedures',//sub causes
+            {
+              name: 'Following Procedures with another long description if needed',//sub causes
               children: [
                 {
                   name: 'Violation by individual',//sub sub causes
@@ -41,8 +41,8 @@ export default class App extends Component {
                   name: 'Improper position or posture for the task'
                 }
               ]
-            },
-            {
+            }, 
+            /* {
               name: 'Following Procedures',//sub causes
               children: [
                 {
@@ -97,7 +97,7 @@ export default class App extends Component {
                   name: 'Servicing of equipment in operation'
                 }
               ]
-            },  */
+            },  
             {
               name: 'Use of Protective Methods',//sub causes
               children: [
@@ -121,7 +121,78 @@ export default class App extends Component {
                 }
               ]
             }
-
+            ,  
+            {
+              name: 'Use of Protective Methods',//sub causes
+              children: [
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                },
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                }
+              ]
+            }
+            ,  
+            {
+              name: 'Use of Protective Methods',//sub causes
+              children: [
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                },
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                }
+              ]
+            }
+            ,  
+            {
+              name: 'Use of Protective Methods',//sub causes
+              children: [
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                },
+                {
+                  name: 'Personal protective equipment not used',//sub sub causes
+                },
+                {
+                  name: 'Disabled guards, warning systems, or safety devices',
+                }, 
+                {
+                  name: 'Personal protective equipment not available'
+                }
+              ]
+            } */
           ]
         },
         {
@@ -164,18 +235,22 @@ export default class App extends Component {
               children:[
                 {
                   name: 'Inadequate Knowledge Transfer (Inadequate Instructor Qualifications)',
-
                 },
                 {
                   name: 'Inadequate Recall of Training Material (Training Not Reinforced on the Job)',
-
                 },
                 {
                   name: 'Inadequate Training Effort (Inadequate Training Goals / Objectives)',
                 },
+                {
+                  name: 'Inadequate Knowledge Transfer (Inadequate Instructor Qualifications)',
+                },
+                {
+                  name: 'Inadequate Recall of Training Material (Training Not Reinforced on the Job)',
+                },
               ]
             },
-           /*  {
+           {
               name: 'Management / Supervision / Employee Leadership',
               children:[
                 {
@@ -193,7 +268,7 @@ export default class App extends Component {
                   name: 'Inadequate Preventive Maintenance (Assessment of Needs)'
                 },
               ]
-            }, */
+            }, 
             {
               name: 'Purchasing, Material Handling & Material Control',
               children:[

@@ -34,14 +34,15 @@
     margin-right: 10px;
 }
 
+
 .cause {    
     display: flex;
     justify-content: center; 
-    align-items: center;   
+    align-items: center;
+    text-align: center;
     width: 60%;
     font-size: 0.95em;
     font-weight: 400;        
-    color: #4f4f4f;
     padding: 5px 0px;
 }
 
@@ -51,20 +52,23 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    overflow: hidden !important;
 }
 
 .rootCauses {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
     flex: 3;
+    flex-direction: column;
+    position: relative;
+    padding: 18px 0px;
+    text-align: right;
+    height: 100%;
+    color: #4f4f4f;
     font-size: 0.85em;
     font-weight: 400;
-    color: #4f4f4f;
-    text-align: right;
-    padding: 18px 0px;
+    position: relative;
 }
+
 
 .legend {
     display: flex;
@@ -214,32 +218,40 @@
     align-items: center;
 }
 
+#effetTitleContainer {
+    position: relative;
+}
+
 .effectValue {    
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.95em;
-    font-weight: 400; 
+    text-align: center;
+    font-weight: 400;
     color: #4f4f4f;
-    padding: 5px 10px 5px 10px;  
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    border-radius: 5px;
+    background: #f9f9f9;
+    min-width: 250px;
+    border: 2px solid #00c0ef;
 }
 
 .diagonalLine {
     flex: 1;
     height:100%;
-    /* min-width: 120px !important;
-    width: 120px !important;
-    max-width: 120px !important; */
-
+    z-index: 999;
 }
 
+
 .blueTopBottom {
-    background: linear-gradient(to top right, transparent calc(50% - 2px), rgb(0, 192, 239), transparent calc(50% + 1.5px) );
+    background: linear-gradient(to top right, transparent calc(50% - 1px), #00c0ef, #ffffff calc(50% + 1.5px))
 }
 
 .blueBottomTop {
-    background: linear-gradient(to bottom right, transparent calc(50% - 2px), rgb(0, 192, 239), transparent calc(50% + 1.5px) );
+    background: linear-gradient(to bottom right, transparent calc(50% - 2px), #00c0ef, #ffffff calc(50% + 1.5px));
 }
 
 .blackTopBottom {
@@ -310,31 +322,34 @@
     justify-content: center;
     align-items: center;
     min-height: 50%;
+    position: relative;
+    left: 0;
+    transition: left 0.3s;
 }
 
-.subcauses-list {
+.subcauses-list-container {
+    margin: 0;
+    margin-left: 5px;
+    padding: 10px;
     text-align: left;
+    background: #f9f9f9;
+    border-left: 1px solid #f9f9f5;
+    border-right: 1px solid #f9f9f5;
+    border-bottom: 1px solid #f9f9f5;
 }
+
 
 .cuseContainer {
-    border: 1px solid #f9f9f9;
-    margin-bottom: 10px;
-    /* border-bottom: 200px solid #f9f9f9;
-    border-left: 0 solid transparent;
-    border-right: 20px solid transparent;
-    height: 0;
-    width: 100%;
-    margin-bottom: 15px; */
+    position: relative;
+    z-index: 0;
+    margin: 10px;
 }
  
 .absoluteBorder {
-    display: none;
-    position: absolute;
-    top: 27px;
-    right: -27px;
-    width: 60px;
-    height:2px;
+    position: relative;
+    height: 0px;
     border-bottom: 2px solid;
+    top: -2px;
 }
 
 .thinBorder {

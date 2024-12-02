@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Grid from '../layout/grid'
 import './fishboneChart.css'
+import {FishboneDrawer} from './FishboneDrawer'
 
 const INITIAL_STATE = {data: undefined, index: 0}
 
@@ -17,26 +18,6 @@ export default class FishboneChart extends Component {
         }        
     }
 
-    calculateAngle(width, height) {
-        // Calculate the tangent of the angle
-        const tangent = height / width;
-    
-        // Use the inverse tangent function (arctan) to get the angle in radians
-        const angleInRadians = Math.atan(tangent);
-    
-        // Convert the angle from radians to degrees
-        const angleInDegrees = angleInRadians * (180 / Math.PI);
-    
-        return angleInDegrees;
-    }
-
-    calculateY(x, angleInDegrees) {
-        const phiInRadians = angleInDegrees * (Math.PI / 180);
-        // Calculate y
-        const y = x * Math.tan(phiInRadians);
-        return y;
-    }
-
     componentWillReceiveProps(nextProps) {
         if(this.props.data !== nextProps.data) {
             const data = nextProps.data
@@ -44,34 +25,14 @@ export default class FishboneChart extends Component {
         }
     }
 
-    createDynamicTrapezoid(element, topWidth, color) {
-        element.style.clipPath = `polygon(
-            0% 0%, 
-            ${(100 - topWidth/2)}% 0%, 
-            100% 100%, 
-            0% 100%
-        )`;
-        element.style.backgroundColor = color;
+    componentDidMount() {
+        this.initFishbone();
+        window.addEventListener('resize', this.initFishbone);
     }
 
-    componentDidMount() {
-        let items = document.querySelectorAll(".causeAndLine");
-        items.forEach(item => {
-            //
-            const lineElement = item.querySelector(".diagonalLine");
-            const angle = this.calculateAngle(lineElement.offsetWidth, lineElement.offsetHeight);
-            //
-            const rootCauses = item.querySelector(".rootCauses");
-            const causes = rootCauses.querySelectorAll(".cuseContainer");
-            //console.log(angle)
-            causes.forEach(cause => {
-                //this.createDynamicTrapezoid(cause, 20, color);
-                //cause.style.clipPath = `polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - (${cause.offsetHeight}px * tan(${angle}deg))))`
-                console.log(angle, cause.offsetHeight)
-                //console.log(this.calculateY(cause.offsetHeight, angle))
-            })
-        })
-    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.initFishbone);
+      }
 
     render() {
         if (!this.state.data) {
@@ -81,15 +42,15 @@ export default class FishboneChart extends Component {
         return (
             <Grid cols={this.props.cols}>
                 <div className="fishboneChart">
-                    {/* Main Problem */}
-                    {/* Main Causes */}
-                    {/* Sub Causes */}
-                    {/* Sub-Sub Causes */}
                     {this.getCauses()}
-                    {this.getEffect()}
                 </div>
             </Grid >
         )
+    }
+
+    initFishbone() {
+        const fishbone = new FishboneDrawer();
+        fishbone.init();
     }
 
     getTopCauses(children) {
@@ -105,7 +66,7 @@ export default class FishboneChart extends Component {
                     <div className={`cause top ${color}_ ${color}Border`}>
                         {cause.name}
                     </div>
-                    <div className="causeAndLine">
+                    <div className="causeAndLine top-items">
                         {this.getSubCauses(cause.children)}
                         <div className={`diagonalLine ${color}TopBottom`}/>
                     </div>
@@ -119,22 +80,21 @@ export default class FishboneChart extends Component {
     //this is the 
     getSubCauses(subCauses) {
         const subCausesItems = subCauses.map((subCause, index) => {
-            return (<div className="cuseContainer" 
-                style={{
-                    position: "relative",
-                    right: (index>0 ? (index*-10)-index : 0),
-                }}
-            
-            key={`root_causes_${subCause.name}_${index}`}>
-                <span className={`cause top gray_ blueBorder lineEffect bold thinBorder`}>{subCause.name}</span>
+            return (<div 
+                    className="cuseContainer" 
+                    key={`root_causes_${subCause.name}_${index}`}
+                >
+                <span className={`cause top gray_ blueBorder lineEffect bold`}>{subCause.name}</span>
                 <div className="blueBorder absoluteBorder" ></div>
-                <ul className='subcauses-list'>
-                    {
-                       Array.isArray(subCause.children) ?  subCause.children.map((_subCause, index) => {
-                            return <li key={`sub_causes_${index}_${_subCause.name}`}>{_subCause.name}</li>
-                        }) : null
-                    }
-                </ul>
+                <div className='subcauses-list-container'>
+                    <ul className='subcauses-list'>
+                        {
+                        Array.isArray(subCause.children) ?  subCause.children.map((_subCause, index) => {
+                                return <li key={`sub_causes_${index}_${_subCause.name}`}>{_subCause.name}</li>
+                            }) : null
+                        }
+                    </ul>
+                </div>
                 
             </div>)
         })
@@ -171,9 +131,8 @@ export default class FishboneChart extends Component {
 
         const bottomCauses = causesArray.map((cause, index) => {
             return (
-                <div key={`bottom_causes_${cause.name}_${index}`}
-                    className="causeContent">
-                    <div className="causeAndLine">
+                <div key={`bottom_causes_${cause.name}_${index}`} className="causeContent">
+                    <div className="causeAndLine bottom-items">
                         {this.getSubCauses(cause.children)}
                         <div className={`diagonalLine ${color}BottomTop`}/>
                     </div>
@@ -194,7 +153,9 @@ export default class FishboneChart extends Component {
         return (
             <div className="causes">
                 {this.getTopCauses(children)}
-                <div className={`lineEffect ${color}Border`} />
+                <div className={`lineEffect ${color}Border`} >
+                    {this.getEffect()}
+                </div>
                 {this.getBottomCauses(children)}
             </div>
         )
@@ -203,7 +164,7 @@ export default class FishboneChart extends Component {
     getEffect() {        
         const color = this.getColor(this.state.index)
         return (
-            <div className={`effect left ${color}_ ${color}Border`}>
+            <div className={`effect left ${color}_ ${color}Border`} id="effetTitleContainer">
                 <div className={`effectValue`}>
                     {this.state.data.title}
                 </div>
