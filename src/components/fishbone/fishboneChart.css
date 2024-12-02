@@ -213,18 +213,19 @@
 }
 
 .effect {    
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 #effetTitleContainer {
-    position: relative;
+   /*  position: relative;
+    width: 100%; */
 }
 
 .effectValue {    
-    flex: 1;
-    display: flex;
+    /*flex: 1;
+    display: flex;*/
     justify-content: center;
     align-items: center;
     font-size: 0.95em;
@@ -232,11 +233,13 @@
     font-weight: 400;
     color: #4f4f4f;
     padding: 5px 10px 5px 10px;
-    position: absolute;
+    position: relative;
     border-radius: 5px;
     background: #f9f9f9;
-    min-width: 250px;
+    min-width: 200px;
+    max-width: 240px;
     border: 2px solid #00c0ef;
+
 }
 
 .diagonalLine {
@@ -329,7 +332,6 @@
 
 .subcauses-list-container {
     margin: 0;
-    margin-left: 5px;
     padding: 10px;
     text-align: left;
     background: #f9f9f9;

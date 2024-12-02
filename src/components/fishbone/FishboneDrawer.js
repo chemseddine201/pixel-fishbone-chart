@@ -8,6 +8,7 @@ export class FishboneDrawer {
         this.borderSelector = '.absoluteBorder';
         this.titleContainerSelector = '#effetTitleContainer';
         this.titleSelector = '.effectValue';
+        this.topCausesContainerSelector = '.top-group';
 
     }
 
@@ -96,10 +97,13 @@ export class FishboneDrawer {
     }
 
     fixTitlePosition() {
-        const titleContainer = document.querySelector(this.titleContainerSelector);
-        const titleContainerBoundries = titleContainer.getBoundingClientRect();
+        const topCausesContainer = document.querySelector(this.topCausesContainerSelector);
         const title = document.querySelector(this.titleSelector);
-        const position = parseInt(titleContainerBoundries.width);
-        title.style.left = `${position}px`;
+        if(!topCausesContainer || !title) return;
+        const boundries = topCausesContainer.getBoundingClientRect();
+        const titleBoundries = title.getBoundingClientRect();
+        
+        const yPosition = parseInt(boundries.height - (titleBoundries.height/2));
+        title.style.top = `${parseInt(yPosition)}px`;
     }
 }

@@ -43,6 +43,7 @@ export default class FishboneChart extends Component {
             <Grid cols={this.props.cols}>
                 <div className="fishboneChart">
                     {this.getCauses()}
+                    {this.getEffect()}
                 </div>
             </Grid >
         )
@@ -74,7 +75,7 @@ export default class FishboneChart extends Component {
             )
         })
 
-        return (<div className="causesGroup">{topCauses}</div>)
+        return (<div className="causesGroup top-group">{topCauses}</div>)
     }
 
     //this is the 
@@ -153,9 +154,7 @@ export default class FishboneChart extends Component {
         return (
             <div className="causes">
                 {this.getTopCauses(children)}
-                <div className={`lineEffect ${color}Border`} >
-                    {this.getEffect()}
-                </div>
+                <div className={`lineEffect ${color}Border`} />
                 {this.getBottomCauses(children)}
             </div>
         )
@@ -164,7 +163,7 @@ export default class FishboneChart extends Component {
     getEffect() {        
         const color = this.getColor(this.state.index)
         return (
-            <div className={`effect left ${color}_ ${color}Border`} id="effetTitleContainer">
+            <div className={`effect ${color}Border`} id="effetTitleContainer">
                 <div className={`effectValue`}>
                     {this.state.data.title}
                 </div>
